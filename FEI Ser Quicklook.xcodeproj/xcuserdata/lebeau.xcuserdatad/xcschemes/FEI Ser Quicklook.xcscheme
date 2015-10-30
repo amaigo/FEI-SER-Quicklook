@@ -34,8 +34,8 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -44,7 +44,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         FilePath = "/Users/lebeau/Library/Developer/Xcode/DerivedData/FEI_Ser_Quicklook-gtlphecwfpdhjzgeilctafvpwvmi/Build/Products/Debug/qlmanage">
+         FilePath = "/Users/lebeau/Library/Developer/Xcode/DerivedData/FEI_Ser_Quicklook-fgnulqthdxskthbslzlfsdquzpgc/Build/Products/Debug/qlmanage">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
@@ -57,7 +57,15 @@
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-p dummy.ser"
+            argument = "-c public.data"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-g $(BUILD_DIR)/Debug/FEI\ Ser\ Quicklook.qlgenerator"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-p RevSTEMexample.ser"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
