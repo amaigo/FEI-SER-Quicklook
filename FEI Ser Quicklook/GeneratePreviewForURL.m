@@ -185,7 +185,6 @@ void GetImageParametersWithURL(CFURLRef emiUrl){
 
         [emiData getBytes: &dataOffsetArray[i] range:range];
         
-        printf("%d\n", dataOffsetArray[i]);
         range.location +=range.length;
         
     }
@@ -409,6 +408,10 @@ void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef
             canvasSize.width = arraySizeX;
             CGContextRef cgContext = QLPreviewRequestCreateContext(*thePreview, canvasSize, TRUE,  options);
 
+            CGAffineTransform flipVertical = CGAffineTransformMake(
+                                                                   1, 0, 0, -1, 0, arraySizeY
+                                                                   );
+            CGContextConcatCTM(cgContext, flipVertical);
             
            // Copying context content
             CGContextDrawImage(cgContext, CGRectMake(0,0, arraySizeX, arraySizeY), emiImage);
