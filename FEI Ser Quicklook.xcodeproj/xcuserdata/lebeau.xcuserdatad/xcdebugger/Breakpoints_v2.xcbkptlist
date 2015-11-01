@@ -22,16 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FEI Ser Quicklook/GeneratePreviewForURL.m"
-            timestampString = "467926686.371162"
+            filePath = "FEI Ser Quicklook/GenerateThumbnailForURL.m"
+            timestampString = "467930705.718886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "GetImageParametersWithURL()"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "GenerateThumbnailForURL()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,77 +41,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FEI Ser Quicklook/GeneratePreviewForURL.m"
-            timestampString = "467925654.878546"
+            filePath = "FEI Ser Quicklook/UtilityFunctions.m"
+            timestampString = "467930725.7529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "GetImageParametersWithURL()"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "CreateThumbnailFromUrl()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FEI Ser Quicklook/GeneratePreviewForURL.m"
-            timestampString = "467925654.878546"
+            filePath = "FEI Ser Quicklook/UtilityFunctions.m"
+            timestampString = "467930743.895171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "GeneratePreviewForURL()"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
+            landmarkName = "CreateThumbnailFromUrl()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FEI Ser Quicklook/GeneratePreviewForURL.m"
-            timestampString = "467926686.371162"
+            filePath = "FEI Ser Quicklook/UtilityFunctions.m"
+            timestampString = "467930751.989356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "CreateImageAndDrawEmiImageFromUrl()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FEI Ser Quicklook/GeneratePreviewForURL.m"
-            timestampString = "467926686.371162"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "CreateImageAndDrawEmiImageFromUrl()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FEI Ser Quicklook/GeneratePreviewForURL.m"
-            timestampString = "467926686.371162"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
-            landmarkName = "CreateImageAndDrawEmiImageFromUrl()"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
+            landmarkName = "CreateThumbnailFromUrl()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

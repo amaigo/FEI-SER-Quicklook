@@ -2,6 +2,8 @@
 #include <CoreServices/CoreServices.h>
 #import <Cocoa/Cocoa.h>
 #include <QuickLook/QuickLook.h>
+#include "UtilityFunctions.h"
+
 
 OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize);
 void CancelThumbnailGeneration(void *thisInterface, QLThumbnailRequestRef thumbnail);
@@ -14,7 +16,10 @@ void CancelThumbnailGeneration(void *thisInterface, QLThumbnailRequestRef thumbn
 
 OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize)
 {
-    // To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c
+    GetImageParametersWithURL(url);
+    CreateThumbnailFromUrl(&thumbnail, url, options);
+    
+    
     return noErr;
 }
 

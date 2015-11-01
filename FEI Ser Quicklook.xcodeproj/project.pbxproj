@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A518F82D1BE3F5BA001B9838 /* RevSTEMexample.ser in CopyFiles */ = {isa = PBXBuildFile; fileRef = A518F82B1BE3F538001B9838 /* RevSTEMexample.ser */; };
 		A518F82E1BE3F5BA001B9838 /* imageSize.ser in CopyFiles */ = {isa = PBXBuildFile; fileRef = A518F82C1BE3F5AE001B9838 /* imageSize.ser */; };
+		A518F8331BE40A3E001B9838 /* UtilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A518F8321BE40A3E001B9838 /* UtilityFunctions.m */; };
 		A5310DE61BE3AB5D00EFD56E /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = A5310DE51BE3AB5D00EFD56E /* GenerateThumbnailForURL.m */; };
 		A5310DE81BE3AB5D00EFD56E /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = A5310DE71BE3AB5D00EFD56E /* GeneratePreviewForURL.m */; };
 		A5310DEA1BE3AB5D00EFD56E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A5310DE91BE3AB5D00EFD56E /* main.c */; };
@@ -49,6 +50,8 @@
 		A518F82A1BE3C105001B9838 /* serReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = serReader.m; sourceTree = "<group>"; };
 		A518F82B1BE3F538001B9838 /* RevSTEMexample.ser */ = {isa = PBXFileReference; lastKnownFileType = file; path = RevSTEMexample.ser; sourceTree = "<group>"; };
 		A518F82C1BE3F5AE001B9838 /* imageSize.ser */ = {isa = PBXFileReference; lastKnownFileType = file; path = imageSize.ser; sourceTree = "<group>"; };
+		A518F8321BE40A3E001B9838 /* UtilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityFunctions.m; sourceTree = "<group>"; };
+		A518F8341BE40D0E001B9838 /* UtilityFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityFunctions.h; sourceTree = "<group>"; };
 		A5310DE21BE3AB5D00EFD56E /* FEI Ser Quicklook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FEI Ser Quicklook.qlgenerator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5310DE51BE3AB5D00EFD56E /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
 		A5310DE71BE3AB5D00EFD56E /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 		A5310DE41BE3AB5D00EFD56E /* FEI Ser Quicklook */ = {
 			isa = PBXGroup;
 			children = (
+				A518F8321BE40A3E001B9838 /* UtilityFunctions.m */,
+				A518F8341BE40D0E001B9838 /* UtilityFunctions.h */,
 				A5310DE51BE3AB5D00EFD56E /* GenerateThumbnailForURL.m */,
 				A5310DE71BE3AB5D00EFD56E /* GeneratePreviewForURL.m */,
 				A5310DE91BE3AB5D00EFD56E /* main.c */,
@@ -186,6 +191,7 @@
 			files = (
 				A5310DE61BE3AB5D00EFD56E /* GenerateThumbnailForURL.m in Sources */,
 				A5310DE81BE3AB5D00EFD56E /* GeneratePreviewForURL.m in Sources */,
+				A518F8331BE40A3E001B9838 /* UtilityFunctions.m in Sources */,
 				A5310DEA1BE3AB5D00EFD56E /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
