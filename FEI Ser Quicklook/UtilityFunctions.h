@@ -46,6 +46,7 @@ struct SASerHeader {
     int numberDimensions;
 };
 
+CGImageRef GetFirstImageFromURL(CFURLRef emiUrl);
 
 void GetImageParametersWithURL(CFURLRef emiUrl);
 void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef emiUrl, CFDictionaryRef options);

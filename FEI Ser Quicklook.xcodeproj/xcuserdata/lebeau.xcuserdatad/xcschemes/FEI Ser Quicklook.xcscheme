@@ -65,7 +65,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-t RevSTEMexample.ser"
+            argument = "-p RevSTEMexample.ser"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
