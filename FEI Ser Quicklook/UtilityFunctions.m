@@ -314,6 +314,30 @@ void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef
             // Copying context content
             CGContextDrawImage(cgContext, CGRectMake(0,0, arraySizeX, arraySizeY), emiImage);
             
+            if(serHeader.totalNumberElements>1){
+            // setup the size
+             
+                CGRect circleRect;
+                float scale = 1.0;
+                CGContextSetLineWidth(cgContext, 5.0 * scale);
+
+                CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
+                float circleSize = canvasSize.width*0.03;
+                float vertPosition = canvasSize.height*0.9;
+
+                float position;
+                for (int j = -1 ; j<=1; j++) {
+                    position = canvasSize.width*(0.5+j*.1);
+                   circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
+
+                    CGContextFillEllipseInRect(cgContext, circleRect);
+                    CGContextStrokeEllipseInRect(cgContext, circleRect);
+                
+                }
+            
+
+            };
+            
             //Release all the crap from memory, may help to prevent crashes
             CGImageRelease(emiImage);
             CGDataProviderRelease(imageProvider);
@@ -470,6 +494,31 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
             
             // Copying context content
             CGContextDrawImage(cgContext, CGRectMake(0,0, arraySizeX, arraySizeY), emiImage);
+            
+            if(serHeader.totalNumberElements>1){
+                // setup the size
+                
+                CGRect circleRect;
+                float scale = 1.0;
+                CGContextSetLineWidth(cgContext, 5.0 * scale);
+                
+                CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
+                float circleSize = canvasSize.width*0.03;
+                float vertPosition = canvasSize.height*0.9;
+                
+                float position;
+                for (int j = -1 ; j<=1; j++) {
+                    position = canvasSize.width*(0.5+j*.1);
+                    circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
+                    
+                    CGContextFillEllipseInRect(cgContext, circleRect);
+                    CGContextStrokeEllipseInRect(cgContext, circleRect);
+                    
+                }
+                
+                
+            };
+            
             
             //Release all the crap from memory, may help to prevent crashes
             CGImageRelease(emiImage);
