@@ -2,7 +2,7 @@
 
 To install, place the latest release in ~/Library/QuickLook
 
-![Example QuickLook image](https://github.com/subangstrom/FEI-SER-Quicklook/tree/master/Screenshots/image_example.png)
+![Example QuickLook image](https://github.com/subangstrom/FEI-SER-Quicklook/blob/master/Screenshots/image_example.png?raw=true)
 
 
 ## Note
