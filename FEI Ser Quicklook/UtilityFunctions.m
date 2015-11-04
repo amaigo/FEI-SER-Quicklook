@@ -73,13 +73,12 @@ void GetImageParametersWithURL(CFURLRef emiUrl){
 
 
     range.location = serHeader.offsetArrayOffset;
+    dataOffsetArray = malloc(sizeof(int)*serHeader.totalNumberElements);
 
-    if (serHeader.seriesVersion >=528){
-        dataOffsetArray = malloc(sizeof(long long)*serHeader.totalNumberElements);
+    if (serHeader.seriesVersion >528){
 
         range.length = 8;
     }else{
-        dataOffsetArray = malloc(sizeof(int)*serHeader.totalNumberElements);
 
         range.length = 4;
     }
@@ -89,65 +88,158 @@ void GetImageParametersWithURL(CFURLRef emiUrl){
         [emiData getBytes: &dataOffsetArray[i] range:range];
 
         range.location +=range.length;
-
+        
     }
+    
 
 
 
 }
 
+//void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef emiUrl,CFDictionaryRef options){
+//
+//
+//
+//
+//    CGImageRef image = GetFirstImageFromURL(emiUrl);
+//
+//    
+//    //Draw the data
+//    CGSize canvasSize;
+//    canvasSize.height = CGImageGetHeight(image);
+//    canvasSize.width = CGImageGetWidth(image);
+//    CGContextRef cgContext = QLPreviewRequestCreateContext(*thePreview, canvasSize, TRUE,  options);
+//
+//    CGAffineTransform flipVertical = CGAffineTransformMake(
+//                                                           1, 0, 0, -1, 0, canvasSize.height
+//                                                           );
+//    CGContextConcatCTM(cgContext, flipVertical);
+//
+//    // Copying context content
+//    CGContextDrawImage(cgContext, CGRectMake(0,0, canvasSize.width, canvasSize.height), image);
+//
+//    if(serHeader.totalNumberElements>1){
+//    // setup the size
+//
+//        CGRect circleRect;
+//        float scale = 1.0;
+//        CGContextSetLineWidth(cgContext, 5.0 * scale);
+//
+//        CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
+//        float circleSize = canvasSize.width*0.03;
+//        float vertPosition = canvasSize.height*0.9;
+//
+//        float position;
+//        for (int j = -1 ; j<=1; j++) {
+//            position = canvasSize.width*(0.5+j*.1);
+//           circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
+//
+//            CGContextFillEllipseInRect(cgContext, circleRect);
+//            CGContextStrokeEllipseInRect(cgContext, circleRect);
+//
+//        }
+//
+//
+//    }
+//
+//    //Release all the crap from memory, may help to prevent crashes
+//    CGImageRelease(image);
+//
+//    QLPreviewRequestFlushContext(*thePreview, cgContext);
+//    CFRelease(cgContext);
+//
+//
+//}
+
+
 void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef emiUrl,CFDictionaryRef options){
-
-
-
-
-    CGImageRef image = GetFirstImageFromURL(emiUrl);
-
     
-    //Draw the data
+    
+    CGImageRef image = GetImageFromURLAtIndex(emiUrl, 0);
+    
     CGSize canvasSize;
+    
     canvasSize.height = CGImageGetHeight(image);
     canvasSize.width = CGImageGetWidth(image);
-    CGContextRef cgContext = QLPreviewRequestCreateContext(*thePreview, canvasSize, TRUE,  options);
+    
+//    if(canvasSize.height > 512 || canvasSize.width> 512){
+//        scalingFactor = 2;
+//     
+//        canvasSize.height = CGImageGetHeight(image)/scalingFactor;
+//        canvasSize.width = CGImageGetWidth(image)/scalingFactor;
+//    }
+    
 
-    CGAffineTransform flipVertical = CGAffineTransformMake(
-                                                           1, 0, 0, -1, 0, canvasSize.height
-                                                           );
-    CGContextConcatCTM(cgContext, flipVertical);
 
-    // Copying context content
-    CGContextDrawImage(cgContext, CGRectMake(0,0, canvasSize.width, canvasSize.height), image);
-
+    
     if(serHeader.totalNumberElements>1){
-    // setup the size
+        // setup the size serHeader.totalNumberElements <= 20
 
-        CGRect circleRect;
-        float scale = 1.0;
-        CGContextSetLineWidth(cgContext, 5.0 * scale);
+        CGRect rect =CGRectMake(0, 0,  canvasSize.height,  canvasSize.width);
+        
+        CGContextRef pdf =  QLPreviewRequestCreatePDFContext(*thePreview, &rect , NULL, NULL);
+        
+        GetPDFSeriesPageFromURL(&pdf, emiUrl, options);
+        QLPreviewRequestFlushContext(*thePreview, pdf);
+        
+        
+        CGContextRelease(pdf);
+        
+        
+    
+            
+    }else{
+        
+        
+        //Draw the data
+        
 
-        CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
-        float circleSize = canvasSize.width*0.03;
-        float vertPosition = canvasSize.height*0.9;
 
-        float position;
-        for (int j = -1 ; j<=1; j++) {
-            position = canvasSize.width*(0.5+j*.1);
-           circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
-
-            CGContextFillEllipseInRect(cgContext, circleRect);
-            CGContextStrokeEllipseInRect(cgContext, circleRect);
-
+        CGContextRef cgContext = QLPreviewRequestCreateContext(*thePreview, canvasSize, TRUE,  options);
+        
+        CGAffineTransform flipVertical = CGAffineTransformMake(
+                                                               1, 0, 0, -1, 0, canvasSize.height
+                                                               );
+        CGContextConcatCTM(cgContext, flipVertical);
+        
+        // Copying context content
+        CGContextDrawImage(cgContext, CGRectMake(0,0, canvasSize.width, canvasSize.height), image);
+        
+        if(serHeader.totalNumberElements>1){
+            
+            
+            
+            CGRect circleRect;
+            float scale = 1.0;
+            CGContextSetLineWidth(cgContext, 5.0 * scale);
+            
+            CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
+            float circleSize = canvasSize.width*0.03;
+            float vertPosition = canvasSize.height*0.9;
+            
+            float position;
+            for (int j = -1 ; j<=1; j++) {
+                position = canvasSize.width*(0.5+j*.1);
+                circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
+                
+                CGContextFillEllipseInRect(cgContext, circleRect);
+                CGContextStrokeEllipseInRect(cgContext, circleRect);
+                
+            }
         }
 
+        
+        
+        QLPreviewRequestFlushContext(*thePreview, cgContext);
+        CFRelease(cgContext);
 
     }
-
+    
     //Release all the crap from memory, may help to prevent crashes
+    
+
+    
     CGImageRelease(image);
-
-    QLPreviewRequestFlushContext(*thePreview, cgContext);
-    CFRelease(cgContext);
-
 
 }
 
@@ -157,7 +249,7 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
 
     
     
-    CGImageRef image = GetFirstImageFromURL(emiUrl);
+    CGImageRef image = GetImageFromURLAtIndex(emiUrl, 0);
     
     
     //Draw the data
@@ -176,7 +268,7 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
     // Copying context content
     CGContextDrawImage(cgContext, CGRectMake(0,0, canvasSize.width, canvasSize.height), image);
     
-    if(serHeader.totalNumberElements>1){
+    if(serHeader.totalNumberElements > 1){
         // setup the size
         
         CGRect circleRect;
@@ -185,7 +277,7 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
         
         CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
         float circleSize = canvasSize.width*0.03;
-        float vertPosition = canvasSize.height*0.9;
+        float vertPosition = canvasSize.height*0.5;
         
         float position;
         for (int j = -1 ; j<=1; j++) {
@@ -211,16 +303,101 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
 
 }
 
+void GetPDFSeriesPageFromURL(CGContextRef *pdfDocument, CFURLRef seriesURL, CFDictionaryRef options){
+    
+    CFMutableDictionaryRef pageDictionary = NULL;
+    CFDataRef boxData = NULL;
+   
+    pageDictionary = CFDictionaryCreateMutable(NULL, 0,
+                                               &kCFTypeDictionaryKeyCallBacks,
+                                               &kCFTypeDictionaryValueCallBacks); // 6
 
-CGImageRef GetFirstImageFromURL(CFURLRef emiUrl){
+    CGRect box;
+    CGPoint origin;
+    origin.x = 0;
+    origin.y = 0;
+    CGSize canvasSize;
+    
+    box.origin = origin;
+    
+    int imageCount = serHeader.totalNumberElements;
+    int cutoff = 20;
+    if (serHeader.totalNumberElements > cutoff) {
+        imageCount = cutoff;
+    }
+    
+    for (int i=0; i < imageCount; i++) {
+        
+        CGImageRef image = NULL;
+
+        image = GetImageFromURLAtIndex(seriesURL, i);
+     
+        canvasSize.height = CGImageGetHeight(image);
+        canvasSize.width = CGImageGetWidth(image);
+        box.size = canvasSize;
+        
+        boxData = CFDataCreate(NULL,(const UInt8 *)&box, sizeof (CGRect));
+        
+        CFDictionarySetValue(pageDictionary, kCGPDFContextMediaBox, boxData);
+        
+
+        CGPDFContextBeginPage(*pdfDocument, pageDictionary);
+        
+        CGContextDrawImage(*pdfDocument, CGRectMake(0,0, canvasSize.width, canvasSize.height), image);
+        
+        if (i == cutoff-1 && serHeader.totalNumberElements >cutoff) {
+            
+            
+            CGRect circleRect;
+            float scale = 1.0;
+
+            CGContextSetLineWidth(*pdfDocument, 5.0 * scale);
+            CGContextSetFillColorWithColor(*pdfDocument, CGColorCreateGenericGray(1.0, 1.0));
+            
+            float circleSize = canvasSize.width*0.03;
+            float vertPosition = canvasSize.height*0.5;
+            
+            float position;
+            for (int j = -1 ; j<=1; j++) {
+                position = canvasSize.width*(0.5+j*.1);
+                circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
+                
+                CGContextFillEllipseInRect(*pdfDocument, circleRect);
+                CGContextStrokeEllipseInRect(*pdfDocument, circleRect);
+                
+            }
+
+
+            CGImageRelease(image);
+            CFRelease(boxData);
+        
+
+    }
+    
+    
+        
+        CGPDFContextEndPage(*pdfDocument);
+        
+    }
+    
+    CFRelease(pageDictionary);
+
+
+    
+}
+
+
+CGImageRef GetImageFromURLAtIndex(CFURLRef emiUrl, int index){
     
     NSFileHandle *dataHandle = [NSFileHandle fileHandleForReadingFromURL:(__bridge NSURL * _Nonnull)(emiUrl) error:nil];
     long long offset;
-    offset = dataOffsetArray[0];
+    
+    offset = dataOffsetArray[index];
     
     [dataHandle seekToFileOffset: offset];
     
     NSData *emiData = [dataHandle readDataOfLength:400];
+    
     
     CGImageRef serImage;
     
@@ -230,9 +407,6 @@ CGImageRef GetFirstImageFromURL(CFURLRef emiUrl){
     NSRange range;
     
     if (serHeader.dataTypeId >= 16674) {
-        
-        
-        
         
         range.location =0;
         range.length = 8;
@@ -327,41 +501,23 @@ CGImageRef GetFirstImageFromURL(CFURLRef emiUrl){
                 else
                     image[i] = temp;
                 
-                
-                
-                
             }
+            
             
             
             CFDataRef imageData = CFDataCreate(NULL, (UInt8 *) image, range.length);
             
-            
-            //Spread the values in the image across the appropriate image range
-            //Contrast-Brightness values should be able to bias this accordingly
-            //
-            //                temp = ((double) (*myPointer-imageParameters.minRange) / (double) rangeDif) * (double) 65536;
-            //
-            //                if(temp > 65000)
-            //                    *myPointer = 65000;
-            //                else if(temp < 0)
-            //                    *myPointer = 0;
-            //                else
-            //                    *myPointer = temp;
-            //
-            //
-            //                myPointer++;
-            //            }
-            
-            
-            
+        
             
             //Create an image provider and image from the given data
             CGDataProviderRef imageProvider = CGDataProviderCreateWithCFData(imageData);
             
-            serImage = CGImageCreate(arraySizeX, arraySizeY, 16, 16, sizeof(short)*arraySizeX, CGColorSpaceCreateWithName(kCGColorSpaceGenericGray), kCGBitmapByteOrder16Little, imageProvider, NULL, TRUE, kCGRenderingIntentDefault);
-            
-            CFRelease(imageData);
+            serImage = CGImageCreate(arraySizeX, arraySizeY, 16, 16, sizeof(short)*arraySizeX, CGColorSpaceCreateWithName(kCGColorSpaceGenericGray), kCGBitmapByteOrder16Little, imageProvider, NULL, false, kCGRenderingIntentDefault);
+
             CGDataProviderRelease(imageProvider);
+            CFRelease(imageData);
+            
+            free(image);
 
 
             
@@ -369,6 +525,8 @@ CGImageRef GetFirstImageFromURL(CFURLRef emiUrl){
         }
     }
     
+    
+
     return serImage;
 }
 

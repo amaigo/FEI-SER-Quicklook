@@ -46,9 +46,11 @@ struct SASerHeader {
     int numberDimensions;
 };
 
-CGImageRef GetFirstImageFromURL(CFURLRef emiUrl);
 
 void GetImageParametersWithURL(CFURLRef emiUrl);
 void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef emiUrl, CFDictionaryRef options);
 void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl, CFDictionaryRef options);
+
+void GetPDFSeriesPageFromURL(CGContextRef *pdfDocument, CFURLRef seriesURL, CFDictionaryRef options);
+CGImageRef GetImageFromURLAtIndex(CFURLRef emiUrl, int index);
 

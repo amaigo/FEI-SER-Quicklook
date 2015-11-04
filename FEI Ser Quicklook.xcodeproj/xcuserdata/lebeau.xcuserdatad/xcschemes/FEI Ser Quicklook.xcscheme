@@ -65,7 +65,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-p RevSTEMexample.ser"
+            argument = "-p reference_roi2_7M_1.ser"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -73,11 +73,15 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Users/lebeau/Library/Developer/Xcode/DerivedData/FEI_Ser_Quicklook-fgnulqthdxskthbslzlfsdquzpgc/Build/Products/Debug/qlmanage">
+      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"

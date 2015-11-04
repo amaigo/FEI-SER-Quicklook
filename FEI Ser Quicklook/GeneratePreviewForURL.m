@@ -63,6 +63,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     CreateImageAndDrawEmiImageFromUrl(&preview, url, options);
     
     
+    
     return noErr;
 }
 
