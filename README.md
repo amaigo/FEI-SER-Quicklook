@@ -1,9 +1,10 @@
 # FEI-SER-Quicklook
-This plugin provides a thumbnail and preview rendering of a ser file generated from TIA. You can download the latest release [here](Releases/FEISerQuicklook_35.zip?raw=true).
+
+This plugin provides a thumbnail and preview rendering of a ser file generated from TIA. You can download the latest release [here](Releases/FEISerQuicklook_41.zip?raw=true).
 
 To install, place the latest release in ~/Library/QuickLook (installer coming soon.)
 
-![Example QuickLook image](https://github.com/subangstrom/FEI-SER-Quicklook/blob/master/Screenshots/image_example.png?raw=true)
+![Example QuickLook image](Screenshots/image_example.png?raw=true)
 
 
 ## Note

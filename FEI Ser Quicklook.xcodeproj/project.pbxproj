@@ -219,7 +219,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\n\nif [ \"$CONFIGURATION\" = \"Release\" ]\nthen\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n\ncd \"$BUILT_PRODUCTS_DIR\" || exit 1\n\nrm -rf Archive\nmkdir Archive\nshortName=\"${EXECUTABLE_NAME// /}\"\n\noutputName=\"${shortName}_$bN.zip\"\n\n# Zip the file\nzip -r \"./Archive/$outputName\" \"$FULL_PRODUCT_NAME\"\n\n# Tell us what happened\n#echo \"Built distribution zip file: $BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.zip\"\n\ncp \"./Archive/$outputName\" \"$PROJECT_DIR/Releases/$outputName\"\n\nfi\n\n\n";
+			shellScript = "#!/bin/bash\n\n\nif [ \"$CONFIGURATION\" = \"Release\" ]\nthen\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n\ncd \"$BUILT_PRODUCTS_DIR\" || exit 1\n\nrm -rf Archive\nmkdir Archive\nshortName=\"${EXECUTABLE_NAME// /}\"\n\noutputName=\"${shortName}_$bN.zip\"\n\n# Zip the file\nzip -r \"./Archive/$outputName\" \"$FULL_PRODUCT_NAME\"\n\n# Tell us what happened\n#echo \"Built distribution zip file: $BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.zip\"\n\ncp \"./Archive/$outputName\" \"$PROJECT_DIR/Releases/$outputName\"\n\ncd $PROJECT_DIR || exit 1\n\n\noldName=\"$(awk '/FEISerQuicklook_/{print $NF}' README.md |  sed 's/.\\{11\\}$//g' | sed 's/^.\\{16\\}//g')\"\n\nsed -i -e \"s/$oldName/$outputName/g\" README.md\n\nrm README.MD-e\n\n\nfi\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
