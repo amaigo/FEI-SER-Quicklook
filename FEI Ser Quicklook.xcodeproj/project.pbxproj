@@ -140,6 +140,8 @@
 				A5310DE01BE3AB5D00EFD56E /* Resources */,
 				A5310DF41BE3B70C00EFD56E /* CopyFiles */,
 				A5310DF61BE3B7C900EFD56E /* CopyFiles */,
+				A5FA69F01BEA5121000023F3 /* ShellScript */,
+				A5FA69F11BEA54EF000023F3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -191,6 +193,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A5FA69F01BEA5121000023F3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((0x$bN))\nbN=$(($bN + 1))\nbN=$(printf \"%X\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"\n";
+		};
+		A5FA69F11BEA54EF000023F3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n\nif [ \"$CONFIGURATION\" = \"Release\" ]\nthen\n\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n\ncd \"$BUILT_PRODUCTS_DIR\" || exit 1\n\nrm -rf Archive\nmkdir Archive\nshortName=\"${EXECUTABLE_NAME// /}\"\n\noutputName=\"${shortName}_$bN.zip\"\n\n# Zip the file\nzip -r \"./Archive/$outputName\" \"$FULL_PRODUCT_NAME\"\n\n# Tell us what happened\n#echo \"Built distribution zip file: $BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.zip\"\n\ncp \"./Archive/$outputName\" \"$PROJECT_DIR/Releases/$outputName\"\n\nfi\n\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A5310DDD1BE3AB5D00EFD56E /* Sources */ = {

@@ -28,7 +28,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>35</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
@@ -51,18 +51,26 @@
 	<string>Copyright © 2015 Subangstrom. All rights reserved.</string>
 	<key>QLNeedsToBeRunInMainThread</key>
 	<false/>
+	<key>QLPreviewHeight</key>
+	<integer>500</integer>
+	<key>QLPreviewWidth</key>
+	<integer>500</integer>
+	<key>QLSupportsConcurrentRequests</key>
+	<false/>
+	<key>QLThumbnailMinimumSize</key>
+	<integer>16</integer>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>com.subangstrom.ser</string>
-			<key>UTTypeDescription</key>
-			<string>FEI Ser file type</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
 				<string>public.image</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>FEI Ser file type</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.subangstrom.ser</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -72,13 +80,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>QLPreviewHeight</key>
-	<integer>600</integer>
-	<key>QLPreviewWidth</key>
-	<real>800</real>
-	<key>QLSupportsConcurrentRequests</key>
-	<false/>
-	<key>QLThumbnailMinimumSize</key>
-	<integer>16</integer>
 </dict>
 </plist>
