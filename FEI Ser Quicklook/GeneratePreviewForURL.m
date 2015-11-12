@@ -58,10 +58,13 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-    
+    @autoreleasepool {
+        
+        if(QLPreviewRequestIsCancelled(preview)) return noErr;
+           
     GetImageParametersWithURL(url);
     CreateImageAndDrawEmiImageFromUrl(&preview, url, options);
-    
+    }
     
     
     return noErr;

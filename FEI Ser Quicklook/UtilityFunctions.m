@@ -153,7 +153,8 @@ void GetImageParametersWithURL(CFURLRef emiUrl){
 
 
 void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef emiUrl,CFDictionaryRef options){
-    
+    @autoreleasepool {
+        
     
     CGImageRef image = GetImageFromURLAtIndex(emiUrl, 0);
     
@@ -240,6 +241,7 @@ void CreateImageAndDrawEmiImageFromUrl(QLPreviewRequestRef *thePreview, CFURLRef
 
     
     CGImageRelease(image);
+    }
 
 }
 
@@ -276,12 +278,12 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
         CGContextSetLineWidth(cgContext, 5.0 * scale);
         
         CGContextSetFillColorWithColor(cgContext, CGColorCreateGenericGray(1.0, 1.0));
-        float circleSize = canvasSize.width*0.03;
+        float circleSize = canvasSize.width*0.08;
         float vertPosition = canvasSize.height*0.5;
         
         float position;
         for (int j = -1 ; j<=1; j++) {
-            position = canvasSize.width*(0.5+j*.1);
+            position = canvasSize.width*(0.5+j*.3);
             circleRect  = CGRectMake(position, vertPosition, circleSize, circleSize);
             
             CGContextFillEllipseInRect(cgContext, circleRect);
@@ -305,6 +307,8 @@ void CreateThumbnailFromUrl(QLThumbnailRequestRef *theThumbnail, CFURLRef emiUrl
 
 void GetPDFSeriesPageFromURL(CGContextRef *pdfDocument, CFURLRef seriesURL, CFDictionaryRef options){
     
+    @autoreleasepool {
+        
     CFMutableDictionaryRef pageDictionary = NULL;
     CFDataRef boxData = NULL;
    
@@ -314,14 +318,16 @@ void GetPDFSeriesPageFromURL(CGContextRef *pdfDocument, CFURLRef seriesURL, CFDi
 
     CGRect box;
     CGPoint origin;
-    origin.x = 0;
+    origin.x =0;
     origin.y = 0;
     CGSize canvasSize;
     
     box.origin = origin;
     
     int imageCount = serHeader.totalNumberElements;
-    int cutoff = 20;
+    int cutoff = 15;
+    
+    
     if (serHeader.totalNumberElements > cutoff) {
         imageCount = cutoff;
     }
@@ -381,7 +387,7 @@ void GetPDFSeriesPageFromURL(CGContextRef *pdfDocument, CFURLRef seriesURL, CFDi
     }
     
     CFRelease(pageDictionary);
-
+    }
 
     
 }
@@ -389,6 +395,8 @@ void GetPDFSeriesPageFromURL(CGContextRef *pdfDocument, CFURLRef seriesURL, CFDi
 
 CGImageRef GetImageFromURLAtIndex(CFURLRef emiUrl, int index){
     
+    @autoreleasepool {
+        
     NSFileHandle *dataHandle = [NSFileHandle fileHandleForReadingFromURL:(__bridge NSURL * _Nonnull)(emiUrl) error:nil];
     long long offset;
     
@@ -492,10 +500,10 @@ CGImageRef GetImageFromURLAtIndex(CFURLRef emiUrl, int index){
             
             for(int i = 0; i < arraySizeX*arraySizeY; i++){
                 
-                temp = (unsigned short) round(((double) (image[i]-min) / (double) maxmin) * (double) 65536);
+                temp = (short) round(((double) (image[i]-min) / (double) maxmin) * (double) 65535);
                 
-                if(temp > 65000)
-                    image[i] = 65000;
+                if(temp > 65535)
+                    image[i] = 65535;
                 else if(temp < 0)
                     image[i] = 0;
                 else
@@ -524,9 +532,12 @@ CGImageRef GetImageFromURLAtIndex(CFURLRef emiUrl, int index){
             
         }
     }
+        
+        return serImage;
+
     
+    }
     
 
-    return serImage;
 }
 
